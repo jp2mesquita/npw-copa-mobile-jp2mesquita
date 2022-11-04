@@ -9,7 +9,8 @@ import {
 
 import { THEME } from './src/styles/theme'
 import { Loading } from './src/components/Loading';
-import { SignIn } from './src/screens/Signin';
+import { Routes } from './src/routes';
+import { AuthContextProvider } from "./src/contexts/AuthContext";
 
 
 export default function App() {
@@ -23,14 +24,17 @@ export default function App() {
 
   return (
     <NativeBaseProvider theme={THEME}>
-      <StatusBar 
-        barStyle="light-content"
-        backgroundColor="transparent"
-        translucent
-      />
-      {
-        fontsLoaded ? <SignIn /> : <Loading />
-      }
+      <AuthContextProvider>
+
+        <StatusBar 
+          barStyle="light-content"
+          backgroundColor="transparent"
+          translucent
+          />
+        {
+          fontsLoaded ? <Routes /> : <Loading />
+        }
+      </AuthContextProvider>
     </NativeBaseProvider>
   );
 }
